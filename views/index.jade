@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  if posts
+    each post, i in posts 
+      .post
+        img(src='/images/post/#{post.mainimage}', style='max-width:750px')
+        h1
+          a(href="/posts/show/#{post._id}")
+            =post.title
+        p.meta Posted in 
+          a(href='/categories/#{post.category}') #{post.category} 
+          by #{post.author} on #{ moment(post.date).format('MM-DD-YYYY')}
+        != trancateText(post.body, 400)
+        a.more(href='posts/show/#{post._id}') Read More
+
